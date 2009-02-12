@@ -1,0 +1,15 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2542
+
+This plugin also runs on Vim 6.4.
+
+Usage:
+  [Settings]
+
+  Change mappings (source code).
+
+  [Usual]
+
+  Select a string in visual mode. Press * or # key.
+
+Repository:
+  https://bitbucket.org/shu/starrange/

@@ -16,8 +16,8 @@
 "   Select a string in visual mode. Press * or # key.
 "
 
-vnoremap * :call <SID>StarRange__keepReg()<CR>gv"*y/\V<C-R>=escape(@*, '\')<CR><CR>:call <SID>StarRange__restoreReg()<CR>
-vnoremap # :call <SID>StarRange__keepReg()<CR>gv"*y?\V<C-R>=escape(@*, '\')<CR><CR>:call <SID>StarRange__restoreReg()<CR>
+vnoremap * :call <SID>StarRange__keepReg()<CR>gv"*y/\V<C-R>=<SID>StarRange__substituteSpecialChars(@*)<CR><CR>:call <SID>StarRange__restoreReg()<CR>:echo<CR>
+vnoremap # :call <SID>StarRange__keepReg()<CR>gv"*y?\V<C-R>=<SID>StarRange__substituteSpecialChars(@*)<CR><CR>:call <SID>StarRange__restoreReg()<CR>:echo<CR>
 
 let s:StarRange__reg = ''
 
@@ -27,6 +27,13 @@ endfunction
 
 function! s:StarRange__restoreReg()
   let @* = s:StarRange__reg
+endfunction
+
+function! s:StarRange__substituteSpecialChars(str)
+    let result = escape(a:str, '\')
+    let result = substitute(result, '/', '\\/', 'g')
+    let result = substitute(result, '\r\n\|\r\|\n', '\\n', 'g')
+    return result
 endfunction
 
 " vim: set et ff=unix fileencoding=utf-8 ft=vim sts=4 sw=4 ts=4 tw=78 : 
